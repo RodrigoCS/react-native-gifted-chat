@@ -86,7 +86,7 @@ export default class Bubble extends React.Component {
         </View>
       )
     }
-    return renderSending()
+    return this.renderSending()
   }
 
   renderTime() {
