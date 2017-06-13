@@ -76,6 +76,11 @@ export default class Bubble extends React.Component {
     if (currentMessage.user._id !== this.props.user._id) {
       return
     }
+
+    if (currentMessage.sending) {
+      return this.renderSending()
+    }
+
     if (currentMessage.sent || currentMessage.received) {
       return (
         <View style={styles.tickView}>
@@ -86,7 +91,6 @@ export default class Bubble extends React.Component {
         </View>
       )
     }
-    return this.renderSending()
   }
 
   renderTime() {
