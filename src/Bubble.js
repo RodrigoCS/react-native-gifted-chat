@@ -77,10 +77,6 @@ export default class Bubble extends React.Component {
       return
     }
 
-    if (currentMessage.sending) {
-      return this.renderSending()
-    }
-
     if (currentMessage.sent || currentMessage.received) {
       return (
         <View style={styles.tickView}>
@@ -90,6 +86,10 @@ export default class Bubble extends React.Component {
             <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
         </View>
       )
+    }
+
+    if (!this.props.disableSending) {
+      return this.renderSending()
     }
   }
 
@@ -295,6 +295,7 @@ Bubble.propTypes = {
     left: View.propTypes.style,
     right: View.propTypes.style
   }),
+  disableSending: React.PropTypes.bool,
   //TODO: remove in next major release
   isSameDay: React.PropTypes.func,
   isSameUser: React.PropTypes.func
