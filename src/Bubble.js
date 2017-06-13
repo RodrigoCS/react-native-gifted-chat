@@ -86,6 +86,7 @@ export default class Bubble extends React.Component {
         </View>
       )
     }
+    return renderSending()
   }
 
   renderTime() {
@@ -94,15 +95,15 @@ export default class Bubble extends React.Component {
       if (this.props.renderTime) {
         return this.props.renderTime(timeProps)
       }
-      if (this.props.currentMessage.isRequesting) {
-        return renderLoading
-      }
       return <Time {...timeProps} />
     }
     return null
   }
 
-  renderLoading() {
+  renderSending() {
+    if (this.props.renderSending) {
+      return this.props.renderSending
+    }
     return (
       <ActivityIndicator color="#FFF" style={{ transform: [{ scale: 0.5 }] }} />
     )
