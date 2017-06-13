@@ -4,7 +4,8 @@ import {
   Clipboard,
   StyleSheet,
   TouchableWithoutFeedback,
-  View
+  View,
+  ActivityIndicator
 } from 'react-native'
 
 import MessageText from './MessageText'
@@ -93,9 +94,18 @@ export default class Bubble extends React.Component {
       if (this.props.renderTime) {
         return this.props.renderTime(timeProps)
       }
+      if (this.props.currentMessage.isRequesting) {
+        return renderLoading
+      }
       return <Time {...timeProps} />
     }
     return null
+  }
+
+  renderLoading() {
+    return (
+      <ActivityIndicator color="#FFF" style={{ transform: [{ scale: 0.5 }] }} />
+    )
   }
 
   renderCustomView() {
@@ -154,7 +164,7 @@ export default class Bubble extends React.Component {
                   this.props.bottomContainerStyle[this.props.position]
                 ]}>
                 {this.renderTime()}
-                {/* {this.renderTicks()} */}
+                {this.renderTicks()}
               </View>
             </View>
           </TouchableWithoutFeedback>
